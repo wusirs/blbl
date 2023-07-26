@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heisenberg.blbl.mapper.CommentMapper">
+    <resultMap id="comment" type="com.heisenberg.blbl.domain.Comment">
+        <result column="cid" property="cId" javaType="int"></result>
+        <result column="prev_comment" property="prevComment" javaType="int"></result>
+        <result column="user_id" property="userId" javaType="int"></result>
+        <result column="relate_comment" property="relateComment" javaType="int"></result>
+        <result column="content" property="content" javaType="string"></result>
+        <result column="video_id" property="videoId" javaType="int"></result>
+        <result column="comment_time" property="commentTime" javaType="date"></result>
+    </resultMap>
+
+
+    <select id="queryAll" resultMap="comment">
+        select cid, prev_comment, user_id, relate_comment, content, video_id
+        from T_USER_COMMENT
+    </select>
+</mapper>
