@@ -35,14 +35,18 @@ public class CommentServiceImpl implements CommentService {
         queryWrapper.eq("video_id", "1");
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date1 = sdf.parse("2012-12-12 12:00:00");
-        Date date2 = sdf.parse("2012-12-13 12:00:00");
+        Date date1 = sdf.parse("2023-07-28 12:00:00");
+        Date date2 = sdf.parse("2023-07-29 12:00:00");
 //        Date date3 = sdf.parse("2012-12-12 12:00:00");
 //        Date date4 = sdf.parse("2012-12-13 12:00:00");
         Date date3 = null;
         Date date4 = null;
-        Date date5 = sdf.parse("2012-12-14 12:00:00");
-        Date date6 = sdf.parse("2012-12-15 12:00:00");
+        Date date5 = sdf.parse("2023-07-30 12:00:00");
+        Date date6 = sdf.parse("2023-07-31 12:00:00");
+
+        if ( date1 != null){
+            logger.error("报错了！！！！");
+        }
 
 
         // 如果三组日期都为空，或者任意一组日期为空，那么会组装出错误的sql，执行会报错。
