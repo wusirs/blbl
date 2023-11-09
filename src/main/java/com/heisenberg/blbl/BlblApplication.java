@@ -14,7 +14,5 @@ public class BlblApplication {
 
     // commit 1
 
-    // commit 2 commit3
-
-    // commit3
+    // commit 2
 }
