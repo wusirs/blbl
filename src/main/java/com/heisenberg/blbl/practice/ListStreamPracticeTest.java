@@ -3,15 +3,13 @@ package com.heisenberg.blbl.practice;
 import com.heisenberg.blbl.domain.User;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class ListStreamPracticeTest {
+    Logger logger = Logger.getLogger(getClass().getName());
+
     private static final Map<String, String> person1 = new HashMap<>();
 
     private static final Map<String, String> person2 = new HashMap<>();
@@ -31,18 +29,18 @@ public class ListStreamPracticeTest {
         // List<Object> => Map<String, Object>
         Map<String, User> collect1 = userList.stream().collect(Collectors.toMap(User::getUsername
                 , item -> item, (val1, val2) -> val1));
-        System.out.println(collect1);
+        logger.fine(collect1.toString());
 
         // List<Object> => Map<String, String>
         Map<String, String> collect2 =
                 userList.stream().collect(Collectors.toMap(User::getUsername,
                         User::getPassword, (val1, val2) -> val1));
-        System.out.println(collect2);
+        logger.info(collect2.toString());
 
         // List<Object> => Map<String, List>
         Map<String, List<User>> collect3 =
                 userList.stream().collect(Collectors.groupingBy(User::getUsername));
-        System.out.println(collect3);
+        logger.info(collect3.toString());
 
         // List<Object> => Map<String, List>
         Map<String, List<User>> collect4 =
@@ -53,7 +51,7 @@ public class ListStreamPracticeTest {
                             union.addAll(val2);
                             return union;
                         }));
-        System.out.println(collect4);
+        logger.info(collect4.toString());
 
         List<Map<String, String>> personList = getPersonList();
 
@@ -61,13 +59,13 @@ public class ListStreamPracticeTest {
         Map<String, String> collect5 =
                 personList.stream().collect(Collectors.toMap(item -> item.get("name"),
                         item -> item.get("age"), (val1, val2) -> val2));
-        System.out.println(collect5);
+        logger.info(collect5.toString());
 
         // List<Map<String, String>> => Map<String, Map<String, String>>
         Map<String, Map<String, String>> collect6 =
                 personList.stream().collect(Collectors.toMap(item -> item.get("name"),
                         item -> item, (val1, val2) -> val2));
-        System.out.println(collect6);
+        logger.info(collect6.toString());
     }
 
     private static List<User> getUserList() {
