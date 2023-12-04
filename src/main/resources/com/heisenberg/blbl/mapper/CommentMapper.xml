@@ -5,18 +5,43 @@
 
 <mapper namespace="com.heisenberg.blbl.mapper.CommentMapper">
     <resultMap id="comment" type="com.heisenberg.blbl.domain.Comment">
-        <result column="cid" property="cId" javaType="int"></result>
-        <result column="prev_comment" property="prevComment" javaType="int"></result>
-        <result column="user_id" property="userId" javaType="int"></result>
-        <result column="relate_comment" property="relateComment" javaType="int"></result>
-        <result column="content" property="content" javaType="string"></result>
-        <result column="video_id" property="videoId" javaType="int"></result>
-        <result column="comment_time" property="commentTime" javaType="date"></result>
+        <result column="cid" property="cId" javaType="int"/>
+        <result column="prev_comment" property="prevComment" javaType="int"/>
+        <result column="user_id" property="userId" javaType="int"/>
+        <result column="relate_comment" property="relateComment" javaType="int"/>
+        <result column="content" property="content" javaType="string"/>
+        <result column="video_id" property="videoId" javaType="int"/>
+        <result column="comment_time" property="commentTime" javaType="date"/>
     </resultMap>
 
-
-    <select id="queryAll" resultMap="comment">
+    <sql id="columns">
         select cid, prev_comment, user_id, relate_comment, content, video_id
         from T_USER_COMMENT
+    </sql>
+
+    <select id="queryAll" resultMap="comment">
+        <include refid="columns"/>
+    </select>
+
+
+    <select id="queryByCondition" parameterType="map" resultMap="comment">
+        <include refid="columns"/>
+        <where>
+            <if test="videos != null and videos.size() > 0">
+                AND video_id in
+                <foreach item="item" collection="videos" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="videoIds != null and videoIds != ''">
+                AND video_id in
+                <foreach item="item" collection="videoIds.split(',')" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="videoId != null">
+                AND video_id = #{videoId}
+            </if>
+        </where>
     </select>
 </mapper>

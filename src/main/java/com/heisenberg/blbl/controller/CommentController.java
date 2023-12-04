@@ -3,17 +3,16 @@ package com.heisenberg.blbl.controller;
 import com.heisenberg.blbl.domain.Comment;
 import com.heisenberg.blbl.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin
-public class TestController {
+public class CommentController {
     @Autowired
     private CommentService commentService;
 
@@ -39,5 +38,10 @@ public class TestController {
         return comments;
     }
 
+    @PostMapping("queryByCondition")
+    public List<Comment> queryByCondition(@RequestBody Map<String, Object> params){
+        List<Comment> comments = commentService.queryByCondition(params);
+        return comments;
+    }
 }
 

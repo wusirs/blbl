@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -128,5 +129,10 @@ public class CommentServiceImpl implements CommentService {
         logger.info("评论：", comments);
 
         return comments;
+    }
+
+    @Override
+    public List<Comment> queryByCondition(Map<String, Object> params) {
+        return commentMapper.queryByCondition(params);
     }
 }
