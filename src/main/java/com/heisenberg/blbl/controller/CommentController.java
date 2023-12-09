@@ -2,25 +2,28 @@ package com.heisenberg.blbl.controller;
 
 import com.heisenberg.blbl.domain.Comment;
 import com.heisenberg.blbl.service.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @CrossOrigin
 public class CommentController {
-    @Autowired
+    @Resource
     private CommentService commentService;
+
+    private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
 
     @GetMapping("hello")
     public List<Comment> helloGet(String username) {
-        System.out.println(username);
+        logger.info(username);
         List<Comment> comments = commentService.queryAll();
-        System.out.println(comments);
+        logger.info(comments.toString());
         return comments;
     }
 
@@ -32,16 +35,20 @@ public class CommentController {
 
     @GetMapping("byCondition")
     public List<Comment> byCondition(String username) throws ParseException {
-        System.out.println(username);
+        logger.info(username);
         List<Comment> comments = commentService.byCondition();
-        System.out.println(comments);
+        logger.info(comments.toString());
         return comments;
     }
 
     @PostMapping("queryByCondition")
     public List<Comment> queryByCondition(@RequestBody Map<String, Object> params){
-        List<Comment> comments = commentService.queryByCondition(params);
-        return comments;
+        return commentService.queryByCondition(params);
+    }
+
+    @PostMapping("queryByWrapper")
+    public List<Comment> queryByWrapper() throws ParseException {
+        return commentService.queryByWrapper();
     }
 }
 
