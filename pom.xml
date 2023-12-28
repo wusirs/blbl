@@ -67,7 +67,6 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-
         <!-- mybatis plus 代码生成器依赖 -->
         <dependency>
             <groupId>com.baomidou</groupId>
