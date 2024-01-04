@@ -16,7 +16,7 @@
 
     <sql id="columns">
         select cid, prev_comment, user_id, relate_comment, content, video_id
-        from T_USER_COMMENT
+        from USER_COMMENT
     </sql>
 
     <select id="queryAll" resultMap="comment">
