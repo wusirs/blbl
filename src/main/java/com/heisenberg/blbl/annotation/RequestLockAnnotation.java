@@ -8,4 +8,11 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RequestLockAnnotation {
+    String value() default "";
+
+    /**
+     * 期望时间 单位毫秒
+     * @return int
+     */
+    int expireTime() default 0;
 }
