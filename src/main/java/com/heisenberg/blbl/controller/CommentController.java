@@ -42,7 +42,7 @@ public class CommentController {
     }
 
     @PostMapping("queryByCondition")
-    public List<Comment> queryByCondition(@RequestBody Map<String, Object> params){
+    public List<Comment> queryByCondition(@RequestBody Map<String, Object> params) {
         return commentService.queryByCondition(params);
     }
 
