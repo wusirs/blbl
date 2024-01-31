@@ -26,6 +26,8 @@
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
         <lombok.version>1.18.12</lombok.version>
         <junit.version>4.12</junit.version>
+        <mybatis.plus.version>3.5.3</mybatis.plus.version>
+        <fast.json.version>2.0.46</fast.json.version>
     </properties>
 
     <!--    <dependencyManagement>-->
@@ -63,7 +65,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.3.2</version>
+            <version>${mybatis.plus.version}</version>
         </dependency>
 
         <dependency>
@@ -76,7 +78,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.3.2</version>
+            <version>${mybatis.plus.version}</version>
         </dependency>
 
         <dependency>
@@ -168,6 +170,14 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fast.json.version}</version>
+        </dependency>
+
     </dependencies>
     <!--    </dependencyManagement>-->
 

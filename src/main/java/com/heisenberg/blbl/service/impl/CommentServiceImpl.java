@@ -1,9 +1,13 @@
 package com.heisenberg.blbl.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.heisenberg.blbl.domain.Comment;
 import com.heisenberg.blbl.mapper.CommentMapper;
 import com.heisenberg.blbl.service.CommentService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +15,10 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
+@Slf4j
 public class CommentServiceImpl implements CommentService {
     private final CommentMapper commentMapper;
 
@@ -135,21 +137,39 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> queryByWrapper() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date1 = sdf.parse("2023-07-28 12:01:00");
-        Date date2 = sdf.parse("2023-07-29 12:02:00");
-        Date date3 = sdf.parse("2023-07-28 12:02:00");
-        Date date4 = sdf.parse("2023-07-29 12:02:00");
-        Date date5 = sdf.parse("2023-12-01 12:00:00");
-        Date date6 = sdf.parse("2023-12-31 12:00:00");
-
+    public IPage<Comment> queryByWrapper(JSONObject queryCondition) {
+        Integer currentPage = queryCondition.getInteger("currentPage");
+        Integer pageSize = queryCondition.getInteger("pageSize");
         String commentTime = "comment_time";
         QueryWrapper<Comment> commentQueryWrapper = new QueryWrapper<>();
-        commentQueryWrapper
-                .and(wrapper -> wrapper.ge(commentTime, date1).or().le(commentTime, date2))
-                .and(wrapper -> wrapper.ge(commentTime, date3).or().le(commentTime, date4)).
-                and(wrapper -> wrapper.ge(commentTime, date5).or().le(commentTime, date6));
-        return commentMapper.selectList(commentQueryWrapper);
+        JSONObject filter = queryCondition.getJSONObject("filter");
+        if (!filter.isEmpty()) {
+            filter.forEach((key, value) -> {
+                switch (key) {
+                    case "commentTime":
+                        if (value instanceof ArrayList) {
+                            ((ArrayList<?>) value).forEach(item -> {
+                                if (item instanceof ArrayList && ((ArrayList<?>) item).size() == 2) {
+                                    String commentTimeStart = ((ArrayList<?>) item).get(0).toString();
+                                    String commentTimeEnd = ((ArrayList<?>) item).get(1).toString();
+                                    commentQueryWrapper.and(
+                                            wrapper -> wrapper.ge(commentTime, commentTimeStart).or().le(commentTime, commentTimeEnd)
+                                    );
+                                }
+                            });
+                        }
+                        break;
+                    case "objId":
+                        // do nothing
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+        IPage<Comment> commentIPage = new Page<>(currentPage, pageSize);
+        commentIPage = commentMapper.selectPage(commentIPage, commentQueryWrapper);
+        logger.info("结果：{}", commentIPage);
+        return commentIPage;
     }
 }

@@ -1,5 +1,7 @@
 package com.heisenberg.blbl.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.heisenberg.blbl.domain.Comment;
 import com.heisenberg.blbl.service.CommentService;
 import org.slf4j.Logger;
@@ -47,8 +49,8 @@ public class CommentController {
     }
 
     @PostMapping("queryByWrapper")
-    public List<Comment> queryByWrapper() throws ParseException {
-        return commentService.queryByWrapper();
+    public IPage<Comment> queryByWrapper(@RequestBody JSONObject queryCondition) {
+        return commentService.queryByWrapper(queryCondition);
     }
 }
 

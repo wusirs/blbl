@@ -3,13 +3,13 @@ server:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-#    username: wl
-#    password: qwer1234
-#    url: jdbc:oracle:thin:@localhost:1521:orcl
-#    driver-class-name: oracle.jdbc.OracleDriver
+    #    username: wl
+    #    password: qwer1234
+    #    url: jdbc:oracle:thin:@localhost:1521:orcl
+    #    driver-class-name: oracle.jdbc.OracleDriver
     username: WL
     password: 1234zxcv
-    url: jdbc:mysql://192.168.1.3:3306/blbl?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://192.168.1.4:3306/blbl?useUnicode=true&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       # 初始化大小，最小，最大
