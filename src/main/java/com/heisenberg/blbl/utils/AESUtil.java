@@ -1,4 +1,4 @@
-package com.heisenberg.blbl.util;
+package com.heisenberg.blbl.utils;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +10,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Base64;
 
 
@@ -25,10 +24,7 @@ public class AESUtil {
      * 日志相关
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(AESUtil.class);
-    /**
-     * 编码
-     */
-    private static final String ENCODING = "UTF-8";
+
     /**
      * 算法定义
      */
@@ -116,7 +112,7 @@ public class AESUtil {
                 //根据待解密内容进行解密
                 byte[] decrypted = cipher.doFinal(decodeBase64);
                 //将字节数组转成字符串
-                return new String(decrypted, ENCODING);
+                return new String(decrypted, StandardCharsets.UTF_8);
             } catch (Exception e) {
                 throw new IllegalStateException(e);
             }
@@ -221,7 +217,7 @@ public class AESUtil {
         LOGGER.info("随机key:{}", random);
         LOGGER.info("length:{}",Base64.getDecoder().decode(random).length);
         byte[] a1 = "abc".getBytes(StandardCharsets.UTF_8);
-        LOGGER.info(Arrays.toString(a1));
+        LOGGER.info("abc byte: {}", a1);
 
         LOGGER.info("---------加密---------");
         aesResult = encrypt("Hello", random);
