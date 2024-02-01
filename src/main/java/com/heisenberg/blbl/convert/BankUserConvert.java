@@ -15,14 +15,10 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BankUserConvert {
-    @Mappings({
-            @Mapping(target = "bankCards", ignore = true) // 忽略这个字段，需要从字符串查询转实体list对象
-    })
+    @Mapping(target = "bankCards", ignore = true) // 忽略这个字段，需要从字符串查询转实体list对象
     BankUserDto po2Dto(BankUser bankUser);
 
-    @Mappings(
-            @Mapping(target = "cardType", expression = "java(cardType(bankCard.getCardType()))")
-    )
+    @Mapping(target = "cardType", expression = "java(cardType(bankCard.getCardType()))")
     BankCardDto po2BankCardDto(BankCard bankCard);
 
     List<BankUserDto> po2BanKUserDto(List<BankUser> bankUserList);
