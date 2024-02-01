@@ -19,13 +19,13 @@ public class CommentController {
     @Resource
     private CommentService commentService;
 
-    private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
 
     @GetMapping("hello")
     public List<Comment> helloGet(String username) {
-        logger.info(username);
+        LOGGER.info(username);
         List<Comment> comments = commentService.queryAll();
-        logger.info(comments.toString());
+        LOGGER.info(comments.toString());
         return comments;
     }
 
@@ -37,9 +37,9 @@ public class CommentController {
 
     @GetMapping("byCondition")
     public List<Comment> byCondition(String username) throws ParseException {
-        logger.info(username);
+        LOGGER.info(username);
         List<Comment> comments = commentService.byCondition();
-        logger.info(comments.toString());
+        LOGGER.info(comments.toString());
         return comments;
     }
 
