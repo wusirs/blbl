@@ -140,7 +140,6 @@ public class CommentServiceImpl implements CommentService {
     public IPage<Comment> queryByWrapper(JSONObject queryCondition) {
         Integer currentPage = queryCondition.getInteger("currentPage");
         Integer pageSize = queryCondition.getInteger("pageSize");
-        String commentTime = "comment_time";
         QueryWrapper<Comment> commentQueryWrapper = new QueryWrapper<>();
         JSONObject filter = queryCondition.getJSONObject("filter");
         if (!filter.isEmpty()) {
@@ -153,7 +152,9 @@ public class CommentServiceImpl implements CommentService {
                                     String commentTimeStart = ((ArrayList<?>) item).get(0).toString();
                                     String commentTimeEnd = ((ArrayList<?>) item).get(1).toString();
                                     commentQueryWrapper.and(
-                                            wrapper -> wrapper.ge(commentTime, commentTimeStart).or().le(commentTime, commentTimeEnd)
+                                            // .lambda() 不加这个 Comment::getCommentTime 无法使用
+                                            wrapper -> wrapper.lambda().ge(Comment::getCommentTime, commentTimeStart)
+                                                    .or().le(Comment::getCommentTime, commentTimeEnd)
                                     );
                                 }
                             });
