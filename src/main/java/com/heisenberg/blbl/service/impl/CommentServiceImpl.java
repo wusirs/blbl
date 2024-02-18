@@ -3,6 +3,7 @@ package com.heisenberg.blbl.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.heisenberg.blbl.domain.Comment;
 import com.heisenberg.blbl.mapper.CommentMapper;
@@ -15,7 +16,11 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -32,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> queryAll() {
         List<Comment> comments = commentMapper.queryAll();
-        logger.info(String.format("评论: %s", comments));
+        logger.info("评论: {}", comments);
         return comments;
     }
 
@@ -97,37 +102,36 @@ public class CommentServiceImpl implements CommentService {
         */
 
         queryWrapper.and(wrapper -> {
-                    String commentTime = "comment_time";
                     wrapper.or().or(!(Objects.isNull(date1) && Objects.isNull(date2)),
                                     wrapperDate -> wrapperDate
-                                            .func(i -> timeGe(i, date1, commentTime))
-                                            .func(j -> timeLe(j, date2, commentTime)))
+                                            .func(i -> timeGe(i, date1, Comment::getCommentTime))
+                                            .func(j -> timeLe(j, date2, Comment::getCommentTime)))
                             .or().or(!(Objects.isNull(date3) && Objects.isNull(date4)),
                                     wrapperDate -> wrapperDate
-                                            .func(i -> timeGe(i, date3, commentTime))
-                                            .func(j -> timeLe(j, date4, commentTime)))
+                                            .func(i -> timeGe(i, date3, Comment::getCommentTime))
+                                            .func(j -> timeLe(j, date4, Comment::getCommentTime)))
                             .or().or(!(Objects.isNull(date5) && Objects.isNull(date6)),
                                     wrapperDate -> wrapperDate
-                                            .func(i -> timeGe(i, date5, commentTime))
-                                            .func(j -> timeLe(j, date6, commentTime)));
+                                            .func(i -> timeGe(i, date5, Comment::getCommentTime))
+                                            .func(j -> timeLe(j, date6, Comment::getCommentTime)));
                 }
         );
 
         List<Comment> comments = commentMapper.selectList(queryWrapper);
-        logger.info(String.format("评论: %s", comments));
+        logger.info("评论: {}", comments);
 
         return comments;
     }
 
-    private static void timeLe(QueryWrapper<Comment> j, Date date2, String commentTime) {
+    private static void timeLe(QueryWrapper<Comment> j, Date date2, SFunction<Comment, ?> commentTime) {
         if (Objects.nonNull(date2)) {
-            j.le(commentTime, date2);
+            j.lambda().le(commentTime, date2);
         }
     }
 
-    private static void timeGe(QueryWrapper<Comment> i, Date date1, String commentTime) {
+    private static void timeGe(QueryWrapper<Comment> i, Date date1, SFunction<Comment, ?> commentTime) {
         if (Objects.nonNull(date1)) {
-            i.ge(commentTime, date1);
+            i.lambda().ge(commentTime, date1);
         }
     }
 
