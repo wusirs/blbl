@@ -21,6 +21,11 @@ public class CommentController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
 
+    /**
+     * 测试接口
+     * @param username 姓名
+     * @return {@link List<Comment>}
+     */
     @GetMapping("hello")
     public List<Comment> helloGet(String username) {
         LOGGER.info(username);
@@ -29,12 +34,22 @@ public class CommentController {
         return comments;
     }
 
+    /**
+     * 测试接口
+     * @return {@link String}
+     */
     @PostMapping("hello")
     public String helloPost() {
         return "post hello world！";
     }
 
 
+    /**
+     * 条件查询
+     * @param username 姓名
+     * @return {@link List<Comment>}
+     * @throws ParseException 解析异常
+     */
     @GetMapping("byCondition")
     public List<Comment> byCondition(String username) throws ParseException {
         LOGGER.info(username);
@@ -43,11 +58,19 @@ public class CommentController {
         return comments;
     }
 
+    /**
+     * 查询所有
+     * @return {@link List<Comment>}
+     */
     @PostMapping("queryByCondition")
     public List<Comment> queryByCondition(@RequestBody Map<String, Object> params) {
         return commentService.queryByCondition(params);
     }
 
+    /**
+     * 查询所有
+     * @return {@link List<Comment>}
+     */
     @PostMapping("queryByWrapper")
     public IPage<Comment> queryByWrapper(@RequestBody JSONObject queryCondition) {
         return commentService.queryByWrapper(queryCondition);
