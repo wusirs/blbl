@@ -1,4 +1,4 @@
-package com.heisenberg.blbl.practice;
+package com.heisenberg.blbl.test;
 
 import com.heisenberg.blbl.domain.User;
 import org.junit.jupiter.api.Test;
