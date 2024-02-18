@@ -13,12 +13,23 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author heisenberg
+ * @since 2020/04/13
+ * @version 1.0
+ */
 @RestController
 @CrossOrigin
 public class CommentController {
+    /**
+     * 评论服务
+     */
     @Resource
     private CommentService commentService;
 
+    /**
+     * 日志
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
 
     /**
