@@ -101,7 +101,7 @@ public class CommentServiceImpl implements CommentService {
         boolean  condition这个参数可以加入自己的判断，如果为false，那么这个or的结构体整个去掉。
         */
 
-        queryWrapper.and(wrapper -> {
+        queryWrapper.and(wrapper ->
                     wrapper.or().or(!(Objects.isNull(date1) && Objects.isNull(date2)),
                                     wrapperDate -> wrapperDate
                                             .func(i -> timeGe(i, date1, Comment::getCommentTime))
@@ -113,8 +113,7 @@ public class CommentServiceImpl implements CommentService {
                             .or().or(!(Objects.isNull(date5) && Objects.isNull(date6)),
                                     wrapperDate -> wrapperDate
                                             .func(i -> timeGe(i, date5, Comment::getCommentTime))
-                                            .func(j -> timeLe(j, date6, Comment::getCommentTime)));
-                }
+                                            .func(j -> timeLe(j, date6, Comment::getCommentTime)))
         );
 
         List<Comment> comments = commentMapper.selectList(queryWrapper);

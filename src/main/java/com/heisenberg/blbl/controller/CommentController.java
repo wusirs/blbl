@@ -25,7 +25,7 @@ public class CommentController {
     public List<Comment> helloGet(String username) {
         LOGGER.info(username);
         List<Comment> comments = commentService.queryAll();
-        LOGGER.info(comments.toString());
+        LOGGER.info("comments: {}", comments);
         return comments;
     }
 
@@ -39,7 +39,7 @@ public class CommentController {
     public List<Comment> byCondition(String username) throws ParseException {
         LOGGER.info(username);
         List<Comment> comments = commentService.byCondition();
-        LOGGER.info(comments.toString());
+        LOGGER.info("comments: {}", comments);
         return comments;
     }
 
