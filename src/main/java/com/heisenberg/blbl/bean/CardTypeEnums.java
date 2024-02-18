@@ -1,25 +1,20 @@
 package com.heisenberg.blbl.bean;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 
+@Getter
 public enum CardTypeEnums {
     CREDIT_CARD(0, "信用卡"),
     DEBIT_CARD(1, "储蓄卡");
 
 
-    private Integer code;
-    private String label;
+    private final Integer code;
+    private final String label;
     CardTypeEnums(Integer code, String label) {
         this.code = code;
         this.label = label;
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public String getLabel() {
-        return label;
     }
 
     public static CardTypeEnums byCode(Integer code){
