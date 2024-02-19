@@ -177,6 +177,10 @@
             <artifactId>fastjson</artifactId>
             <version>${fast.json.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
     </dependencies>
     <!--    </dependencyManagement>-->
