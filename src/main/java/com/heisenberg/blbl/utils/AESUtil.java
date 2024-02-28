@@ -17,7 +17,6 @@ import java.util.Base64;
  * AES加密工具类
  *
  * @author ACGkaka
- * @since 2021-06-18 19:11:03
  */
 public class AESUtil {
     /**
