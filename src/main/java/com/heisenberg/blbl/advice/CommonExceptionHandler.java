@@ -32,7 +32,7 @@ public class CommonExceptionHandler {
      * 捕获 自定 异常
      */
     @ExceptionHandler({BusinessException.class})
-    public Result<?> handleBusinessException(BusinessException ex) {
+    public Result<Object> handleBusinessException(BusinessException ex) {
         log.error(ex.getMessage(), ex);
         return Result.failed(ex.getStatus(),ex.getMessage());
     }
@@ -42,7 +42,7 @@ public class CommonExceptionHandler {
      * 说明：参数为必填时，若入参中无此参数则会报MissingServletRequestParameterException
      */
     @ExceptionHandler({MissingServletRequestParameterException.class})
-    public Result<?> handleMissingServletRequestParameterException(MissingServletRequestParameterException ex) {
+    public Result<Object> handleMissingServletRequestParameterException(MissingServletRequestParameterException ex) {
         log.error(ex.getMessage(), ex);
         return Result.failed(ResultEnum.VALIDATE_FAILED.getCode(), ex.getMessage());
     }
@@ -52,7 +52,7 @@ public class CommonExceptionHandler {
      * {@code @PathVariable} 和 {@code @RequestParam} 参数值校验不通过时抛出的异常处理
      */
     @ExceptionHandler({ConstraintViolationException.class})
-    public Result<?> handleConstraintViolationException(ConstraintViolationException ex) {
+    public Result<Object> handleConstraintViolationException(ConstraintViolationException ex) {
         log.error(ex.getMessage(), ex);
         return Result.failed(ResultEnum.VALIDATE_FAILED.getCode(), ex.getMessage());
     }
@@ -62,7 +62,7 @@ public class CommonExceptionHandler {
      * 说明: 定义Integer类型，输入的为String，会出现 MethodArgumentTypeMismatchException异常
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public Result<?> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+    public Result<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
         log.error(ex.getMessage(), ex);
         String message = "参数:" + ex.getName() + " 类型错误";
         return Result.failed(ResultEnum.VALIDATE_FAILED.getCode(), message);
@@ -72,7 +72,7 @@ public class CommonExceptionHandler {
      * {@code @RequestBody} 参数校验不通过时抛出的异常处理
      */
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    public Result<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public Result<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         log.error(ex.getMessage(), ex);
         String msg = ex.getBindingResult().getFieldErrors().stream()
                 .map(f -> f == null ? "null" : f.getField() + ": " + f.getDefaultMessage())
@@ -81,7 +81,7 @@ public class CommonExceptionHandler {
     }
 
     @ExceptionHandler(BindException.class)
-    public Result<?> handleBindException(BindException ex) {
+    public Result<Object> handleBindException(BindException ex) {
         log.error(ex.getMessage(), ex);
         return Result.failed(HttpStatus.BAD_REQUEST.value(),
                 ex.getAllErrors().stream()
@@ -94,7 +94,7 @@ public class CommonExceptionHandler {
      * 捕获 {@code ForbiddenException} 异常
      */
     @ExceptionHandler({ForbiddenException.class})
-    public Result<?> handleForbiddenException(ForbiddenException ex) {
+    public Result<Object> handleForbiddenException(ForbiddenException ex) {
         log.error(ex.getMessage(), ex);
         return Result.failed(ResultEnum.FORBIDDEN);
     }
@@ -104,7 +104,7 @@ public class CommonExceptionHandler {
      * 顶级异常捕获并统一处理，当其他异常无法处理时候选择使用
      */
     @ExceptionHandler({Exception.class})
-    public Result<?> handle(Exception ex) {
+    public Result<Object> handle(Exception ex) {
         log.error(ex.getMessage(), ex);
         return Result.failed(ResultEnum.COMMON_FAILED);
     }
@@ -113,7 +113,7 @@ public class CommonExceptionHandler {
      * 处理已知的系统异常
      */
     @ExceptionHandler({ServletException.class})
-    public Result<?> handle1(Exception ex) {
+    public Result<Object> handle1(Exception ex) {
         log.error(ex.getMessage(), ex);
         return Result.failed(ex.getMessage());
     }
