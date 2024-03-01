@@ -16,6 +16,7 @@ import org.springframework.validation.ObjectError;
 
 import javax.servlet.ServletException;
 import javax.validation.ConstraintViolationException;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -44,7 +45,7 @@ public class CommonExceptionHandler {
     @ExceptionHandler({MissingServletRequestParameterException.class})
     public Result<Object> handleMissingServletRequestParameterException(MissingServletRequestParameterException ex) {
         log.error(ex.getMessage(), ex);
-        return Result.failed(ResultEnum.VALIDATE_FAILED.getCode(), ex.getMessage());
+        return Result.failed(ResultEnum.VALIDATE_FAILED.getCode(), Objects.requireNonNull(ex.getMessage()));
     }
 
     /**
