@@ -178,6 +178,11 @@ public class SnowflakeIdWorker {
      * 测试
      */
     public static void main(String[] args) {
+        String a = "a";
+        String b = "a";
+        System.out.println(a.equals(b));
+        System.out.println(a.hashCode() == b.hashCode());
+
         long start = System.currentTimeMillis();
         SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1, 3);
         for (int i = 0; i < 50; i++) {
