@@ -40,6 +40,17 @@ spring:
     restart:
       enabled: true
       additional-paths: src/main/java
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    timeout: 1000
+    lettuce:
+      pool:
+        max-active: 32
+        max-wait: -1
+        max-idle: 16
+        min-idle: 8
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
