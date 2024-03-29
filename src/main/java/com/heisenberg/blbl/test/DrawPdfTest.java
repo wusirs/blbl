@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * <a href="https://blog.csdn.net/zhuocailing3390/article/details/124144144">示例一</a><br/>
