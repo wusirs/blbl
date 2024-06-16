@@ -29,6 +29,7 @@
         <mybatis.plus.version>3.5.3</mybatis.plus.version>
         <fast.json.version>2.0.46</fast.json.version>
         <commons.pool2.version>2.0</commons.pool2.version>
+        <spring.redisson.version>3.16.2</spring.redisson.version>
         <sonar.organization>wusirs</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
@@ -186,6 +187,14 @@
             <artifactId>commons-pool2</artifactId>
             <version>${commons.pool2.version}</version>
         </dependency>
+
+        <!--Redisson-->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>${spring.redisson.version}</version>
+        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>

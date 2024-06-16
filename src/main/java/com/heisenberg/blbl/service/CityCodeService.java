@@ -17,4 +17,13 @@ public interface CityCodeService extends IService<CityCode> {
      * @return {@link IPage<CityCode>}
      */
     IPage<CityCode> queryAll();
+
+    /**
+     *
+     * @param cityId 城市id
+     * @return {@link CityCode}
+     * @author Heisenberg
+     * @date 2024/6/16 15:08
+     */
+    CityCode queryById(String cityId);
 }

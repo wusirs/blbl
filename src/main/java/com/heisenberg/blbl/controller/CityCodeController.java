@@ -35,4 +35,26 @@ public class CityCodeController {
     public void saveCityCode(@RequestBody List<CityCode> cityCodeList){
         cityCodeService.saveBatch(cityCodeList);
     }
+
+    /**
+     * @param cityCode 城市编码
+     * @author Heisenberg
+     * @date 2024/6/15 18:10
+     */
+    @RequestMapping("/updateCityCode")
+    public void updateCityCode(@RequestBody CityCode cityCode){
+        cityCodeService.updateById(cityCode);
+    }
+
+    /**
+     *
+     * @param cityId 城市id
+     * @return {@link CityCode}
+     * @author Heisenberg
+     * @date 2024/6/16 15:08
+     */
+    @RequestMapping("/queryById")
+    public CityCode queryById(String cityId){
+        return cityCodeService.queryById(cityId);
+    }
 }
