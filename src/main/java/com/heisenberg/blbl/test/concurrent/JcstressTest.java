@@ -8,6 +8,7 @@ import org.openjdk.jcstress.infra.results.II_Result;
 
 /**
  * 要用jdk17运行
+ * volatile 可以禁止指令重排序
  * @author Heisenberg
  * @version 1.0
  * @date 2024-07-03 20:29:29
@@ -18,7 +19,7 @@ import org.openjdk.jcstress.infra.results.II_Result;
 @Outcome(id = "0, 1", expect = Expect.ACCEPTABLE, desc = "INTERESTING")
 public class JcstressTest {
     int x;
-    int y;
+    volatile int y;
 
     @Actor
     public void actorA(){
