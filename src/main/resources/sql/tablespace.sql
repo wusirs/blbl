@@ -15,6 +15,7 @@ create user 'WL'@'%' identified by '1234zxcv';
 #将数据库wordpress下的所有（*）授权给userwordpress
 grant all privileges on blbl.* to 'WL'@'%';
 grant all privileges on common.* to 'WL'@'%';
+grant all privileges on tuling.* to 'WL'@'%';
 #最后刷新权限
 flush privileges;
 
@@ -23,3 +24,14 @@ flush privileges;
 # 或者 这种方法 ：创建并授权用户，是二和三的合并。
 grant all on wl.* to 'WL'@'%' identified by '1234zxcv';
 flush privileges;
+
+
+create database nacos character set utf8;
+create user 'nacos'@'%' identified by 'nacos';
+grant all privileges on nacos.* to 'nacos'@'%';
+flush privileges;
+
+
+
+create database ssm character set utf8;
+grant all privileges on ssm.* to 'WL'@'%';
