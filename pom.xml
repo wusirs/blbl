@@ -213,6 +213,20 @@
             <artifactId>netty-all</artifactId>
             <version>4.1.42.Final</version>
         </dependency>
+
+<!--并发测试工具包-->
+        <dependency>
+            <groupId>org.openjdk.jcstress</groupId>
+            <artifactId>jcstress-core</artifactId>
+            <version>0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jcstress</groupId>
+            <artifactId>jcstress-samples</artifactId>
+            <version>0.5</version>
+        </dependency>
+
+
     </dependencies>
     <!--    </dependencyManagement>-->
 
