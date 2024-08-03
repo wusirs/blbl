@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class CommonExceptionHandler {
 
+
     /**
      * 捕获 自定 异常
      */
