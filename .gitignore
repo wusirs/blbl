@@ -33,3 +33,5 @@ build/
 .vscode/
 /logs/
 qodana.yaml
+/log.path_IS_UNDEFINED/
+/log/
