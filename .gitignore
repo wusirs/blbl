@@ -35,3 +35,5 @@ build/
 qodana.yaml
 /log.path_IS_UNDEFINED/
 /log/
+/.fastRequest/
+/1.json
