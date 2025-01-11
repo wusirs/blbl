@@ -6,7 +6,6 @@ import com.heisenberg.blbl.convert.BankUserConvert;
 import com.heisenberg.blbl.service.CommentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,11 +24,6 @@ public class MapStructTests {
 
     @Autowired
     private CommentService commentService;
-
-
-
-
-    private static final BankUserConvert MAPPER = Mappers.getMapper(BankUserConvert.class);
 
     @Test
     public void testMapStruct(){
